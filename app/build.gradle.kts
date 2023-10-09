@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("org.openapi.generator")
 }
 
 android {
@@ -32,6 +33,24 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+    tasks.register(
+        "generateClient",
+        org.openapitools.generator.gradle.plugin.tasks.GenerateTask::class,
+    ) {
+        generatorName.set("kotlin")
+        inputSpec.set("$rootDir/specs/petstore-v3.0.yaml")
+        outputDir.set("$rootDir/app/src/main/java/com/example/test/network")
+        packageName.set("com.example.network")
+        apiPackage.set("com.example.network.api")
+        modelPackage.set("com.example.network.model")
+        invokerPackage.set("com.example.network.invoker")
+        configOptions.set(
+            mapOf(
+                "library" to "jvm-retrofit2",
+                "dateLibrary" to "java8",
+            ),
+        )
     }
 }
 
