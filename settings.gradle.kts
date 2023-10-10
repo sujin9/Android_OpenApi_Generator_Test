@@ -15,5 +15,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Test"
+rootProject.name = "CodeGenTest"
 include(":app")

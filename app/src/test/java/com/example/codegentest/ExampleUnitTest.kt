@@ -1,4 +1,4 @@
-package com.example.test
+package com.example.codegentest
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
