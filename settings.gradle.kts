@@ -17,3 +17,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "CodeGenTest"
 include(":app")
+include(":network")

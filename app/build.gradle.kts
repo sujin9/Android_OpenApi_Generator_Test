@@ -1,7 +1,6 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("org.openapi.generator")
 }
 
 android {
@@ -34,24 +33,6 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    tasks.register(
-        "generateClient",
-        org.openapitools.generator.gradle.plugin.tasks.GenerateTask::class,
-    ) {
-        generatorName.set("kotlin")
-        inputSpec.set("$rootDir/specs/petstore-v3.0.yaml")
-        outputDir.set("$rootDir/app/src/main/java/com/example/test/network")
-        packageName.set("com.example.network")
-        apiPackage.set("com.example.network.api")
-        modelPackage.set("com.example.network.model")
-        invokerPackage.set("com.example.network.invoker")
-        configOptions.set(
-            mapOf(
-                "library" to "jvm-retrofit2",
-                "dateLibrary" to "java8",
-            ),
-        )
-    }
 }
 
 dependencies {
@@ -60,6 +41,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation(project(mapOf("path" to ":network")))
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
